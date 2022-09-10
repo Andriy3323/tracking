@@ -1,0 +1,32 @@
+@import 'mixins';
+
+body {
+  margin: 3%;
+  font-family: sans-serif;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  margin: 5% auto;
+
+  max-width: 960px;
+}
+
+@include onTablet {
+  .app-container {
+    flex-direction: row;
+    width: 700px;
+  }
+}

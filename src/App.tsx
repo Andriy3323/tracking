@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { FindParcel } from './components/FindParcel';
+import { ParcelHistory } from './components/ParcelHistory';
+import './App.scss';
 
-function App() {
+export const App = () => {
+  const [history, setHistory] = useState<string[]>([]);
+  const [currRequest, setCurrRequest] = useState<string>('');
+
+  const handleAddHistory = (query: string) => {
+    if (!history.some(currHistory => currHistory === query)) {
+      setHistory(prevHistory => [query, ...prevHistory]);
+    }
+  }
+
+  const handleMakeRequest = (query: string) => {
+    setCurrRequest(query);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app-container'>
+      <FindParcel handleAddHistory={handleAddHistory} requestFromHistory={currRequest} history={history} />
+      <ParcelHistory history={history} handleMakeRequest={handleMakeRequest} />
     </div>
-  );
+  )
 }
-
-export default App;
